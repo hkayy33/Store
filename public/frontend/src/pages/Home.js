@@ -7,15 +7,15 @@ const Home = () => {
 
   const categories = {
     vegetables: [
-      { id: 1, name: 'Potato', price: 1.99, image: '/images/potato.jpg' },
-      { id: 2, name: 'Carrots', price: 0.99, image: '/images/carrots.jpg' },
-      { id: 3, name: 'Broccoli', price: 1.49, image: '/images/broccoli.jpg' }
+      { id: 1, name: 'Potato', price: 1.99, image: '/images/potato.jpeg' },
+      { id: 2, name: 'Carrots', price: 0.99, image: '/images/carrots.png' },
+      { id: 3, name: 'Broccoli', price: 1.49, image: '/images/broccoli.jpg.webp' }
     ],
     meats: [
-      { id: 4, name: 'Chicken', price: 3.99, image: '/images/chicken.jpg' },
-      { id: 5, name: 'Fish', price: 5.99, image: '/images/fish.jpg' },
-      { id: 6, name: 'Pork', price: 4.99, image: '/images/pork.jpg' },
-      { id: 7, name: 'Beef', price: 6.99, image: '/images/beef.jpg' }
+      { id: 4, name: 'Chicken', price: 3.99, image: '/images/chicken.webp' },
+      { id: 5, name: 'Fish', price: 5.99, image: '/images/fish.webp' },
+      { id: 6, name: 'Pork', price: 4.99, image: '/images/pork.webp' },
+      { id: 7, name: 'Beef', price: 6.99, image: '/images/beef.webp' }
     ]
   };
 
@@ -51,13 +51,14 @@ const Home = () => {
                       onClick={() => handleProductClick(product)}
                     >
                       <div className="d-flex align-items-center">
-                        <img
-                          src={product.image}
-                          alt={product.name}
-                          className="rounded me-3"
-                          style={{ width: '50px', height: '50px', objectFit: 'cover' }}
-                        />
-                        <span>{product.name}</span>
+                        <div className="product-image-container me-3">
+                          <img
+                            src={product.image}
+                            alt={product.name}
+                            className="product-image"
+                          />
+                        </div>
+                        <span className="product-name">{product.name}</span>
                       </div>
                       <span className="badge bg-primary rounded-pill">£{product.price.toFixed(2)}</span>
                     </button>
@@ -84,13 +85,14 @@ const Home = () => {
                       onClick={() => handleProductClick(product)}
                     >
                       <div className="d-flex align-items-center">
-                        <img
-                          src={product.image}
-                          alt={product.name}
-                          className="rounded me-3"
-                          style={{ width: '50px', height: '50px', objectFit: 'cover' }}
-                        />
-                        <span>{product.name}</span>
+                        <div className="product-image-container me-3">
+                          <img
+                            src={product.image}
+                            alt={product.name}
+                            className="product-image"
+                          />
+                        </div>
+                        <span className="product-name">{product.name}</span>
                       </div>
                       <span className="badge bg-primary rounded-pill">£{product.price.toFixed(2)}</span>
                     </button>
