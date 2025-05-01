@@ -1,9 +1,9 @@
 <?php
 class Database {
     private $host = "localhost";
-    private $db_name = "grocery_store";
+    private $db_name = "grocerystore";
     private $username = "root";
-    private $password = "";
+    private $password = "@webtechHk04";
     public $conn;
 
     public function getConnection() {

@@ -1,27 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const [activeCategory, setActiveCategory] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const categories = {
-    vegetables: [
-      { id: 1, name: 'Potato', price: 1.99, image: '/images/potato.jpeg' },
-      { id: 2, name: 'Carrots', price: 0.99, image: '/images/carrots.png' },
-      { id: 3, name: 'Broccoli', price: 1.49, image: '/images/broccoli.jpg.webp' }
-    ],
-    meats: [
-      { id: 4, name: 'Chicken', price: 3.99, image: '/images/chicken.webp' },
-      { id: 5, name: 'Fish', price: 5.99, image: '/images/fish.webp' },
-      { id: 6, name: 'Pork', price: 4.99, image: '/images/pork.webp' },
-      { id: 7, name: 'Beef', price: 6.99, image: '/images/beef.webp' }
-    ]
-  };
+  useEffect(() => {
+    fetch('/api/products.php')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) setProducts(data.products);
+        setLoading(false);
+      });
+  }, []);
+
+  // Group products by category
+  const categories = products.reduce((acc, product) => {
+    acc[product.category] = acc[product.category] || [];
+    acc[product.category].push(product);
+    return acc;
+  }, {});
 
   const handleProductClick = (product) => {
     navigate(`/products/${product.id}`);
   };
+
+  if (loading) return <div className="text-center mt-5">Loading...</div>;
 
   return (
     <div className="container mt-5">
@@ -44,7 +50,7 @@ const Home = () => {
             {activeCategory === 'vegetables' && (
               <div className="category-dropdown fade-in">
                 <div className="list-group">
-                  {categories.vegetables.map(product => (
+                  {(categories.vegetables || []).map(product => (
                     <button
                       key={product.id}
                       className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
@@ -53,14 +59,14 @@ const Home = () => {
                       <div className="d-flex align-items-center">
                         <div className="product-image-container me-3">
                           <img
-                            src={product.image}
+                            src={product.image_url}
                             alt={product.name}
                             className="product-image"
                           />
                         </div>
                         <span className="product-name">{product.name}</span>
                       </div>
-                      <span className="badge bg-primary rounded-pill">£{product.price.toFixed(2)}</span>
+                      <span className="badge bg-primary rounded-pill">£{Number(product.price).toFixed(2)}</span>
                     </button>
                   ))}
                 </div>
@@ -78,7 +84,7 @@ const Home = () => {
             {activeCategory === 'meats' && (
               <div className="category-dropdown fade-in">
                 <div className="list-group">
-                  {categories.meats.map(product => (
+                  {(categories.meats || []).map(product => (
                     <button
                       key={product.id}
                       className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
@@ -87,14 +93,14 @@ const Home = () => {
                       <div className="d-flex align-items-center">
                         <div className="product-image-container me-3">
                           <img
-                            src={product.image}
+                            src={product.image_url}
                             alt={product.name}
                             className="product-image"
                           />
                         </div>
                         <span className="product-name">{product.name}</span>
                       </div>
-                      <span className="badge bg-primary rounded-pill">£{product.price.toFixed(2)}</span>
+                      <span className="badge bg-primary rounded-pill">£{Number(product.price).toFixed(2)}</span>
                     </button>
                   ))}
                 </div>
