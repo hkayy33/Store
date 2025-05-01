@@ -66,7 +66,13 @@ const Home = () => {
                         </div>
                         <span className="product-name">{product.name}</span>
                       </div>
-                      <span className="badge bg-primary rounded-pill">£{Number(product.price).toFixed(2)}</span>
+                      <button type="button" className="modern-cart-badge">
+                        <span className="price">£{Number(product.price).toFixed(2)}</span>
+                        <span className="cart-action">
+                          <i className="bi bi-cart-plus me-1"></i>
+                          Add to Cart
+                        </span>
+                      </button>
                     </button>
                   ))}
                 </div>
@@ -100,7 +106,13 @@ const Home = () => {
                         </div>
                         <span className="product-name">{product.name}</span>
                       </div>
-                      <span className="badge bg-primary rounded-pill">£{Number(product.price).toFixed(2)}</span>
+                      <button type="button" className="modern-cart-badge">
+                        <span className="price">£{Number(product.price).toFixed(2)}</span>
+                        <span className="cart-action">
+                          <i className="bi bi-cart-plus me-1"></i>
+                          Add to Cart
+                        </span>
+                      </button>
                     </button>
                   ))}
                 </div>

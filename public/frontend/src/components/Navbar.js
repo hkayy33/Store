@@ -34,12 +34,6 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/products">
-                <i className="bi bi-grid me-1"></i>
-                Products
-              </Link>
-            </li>
             {user && (
               <li className="nav-item">
                 <Link className="nav-link" to="/cart">

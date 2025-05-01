@@ -239,3 +239,167 @@ body {
 .category-dropdown .list-group-item:hover .product-image {
   transform: scale(1.1);
 }
+
+/* Price badge slide animation - perfectly fit content and pill shape */
+.price-badge {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-width: 56px;
+  padding: 0.4rem 1.2rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-size: 1rem;
+  vertical-align: middle;
+  box-sizing: border-box;
+  border-radius: 999px;
+  max-width: none;
+}
+.price-badge .price-text,
+.price-badge .add-to-cart-text {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  line-height: 1.5;
+  font-size: 1rem;
+  transition: opacity 0.25s, transform 0.25s;
+  will-change: opacity, transform;
+}
+.price-badge .price-text {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+.price-badge .add-to-cart-text {
+  opacity: 0;
+  transform: scale(0.8);
+  z-index: 2;
+}
+.price-badge:hover .price-text {
+  opacity: 0;
+  transform: scale(0.8);
+}
+.price-badge:hover .add-to-cart-text {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Center badge vertically in the list-group-item */
+.list-group-item.d-flex {
+  align-items: center !important;
+}
+
+.price-badge-animated {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 56px;
+  padding: 0.4rem 1.2rem;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background 0.25s, min-width 0.25s, box-shadow 0.25s, padding 0.25s;
+  box-shadow: 0 2px 8px rgba(37,99,235,0.08);
+  outline: none;
+}
+.price-badge-animated:focus {
+  box-shadow: 0 0 0 2px #93c5fd;
+}
+.price-badge-animated .price-text,
+.price-badge-animated .add-to-cart-text {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  line-height: 1.5;
+  font-size: 1rem;
+  transition: opacity 0.25s, transform 0.25s;
+  will-change: opacity, transform;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.price-badge-animated .price-text {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+.price-badge-animated .add-to-cart-text {
+  opacity: 0;
+  transform: scale(0.8);
+  z-index: 2;
+}
+.price-badge-animated:hover,
+.price-badge-animated:focus {
+  min-width: 140px;
+  background: #1d4ed8;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.price-badge-animated:hover .price-text,
+.price-badge-animated:focus .price-text {
+  opacity: 0;
+  transform: scale(0.8);
+}
+.price-badge-animated:hover .add-to-cart-text,
+.price-badge-animated:focus .add-to-cart-text {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.modern-cart-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, #2563eb 60%, #4f8cff 100%);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-size: 1.08rem;
+  font-weight: 600;
+  min-width: 120px;
+  padding: 0.6rem 1.5rem;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.10);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.25s, padding 0.25s, min-width 0.25s, background 0.25s, font-size 0.25s;
+}
+.modern-cart-badge .price {
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  z-index: 1;
+  transition: color 0.25s;
+  position: relative;
+  left: 0;
+  text-align: center;
+  opacity: 1;
+  transform: none;
+}
+.modern-cart-badge .cart-action {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.3s, transform 0.3s;
+  margin-left: 0.5rem;
+  font-size: 1.08rem;
+  position: relative;
+}
+.modern-cart-badge:hover .cart-action,
+.modern-cart-badge:focus .cart-action {
+  opacity: 1;
+  transform: translateX(0);
+}
