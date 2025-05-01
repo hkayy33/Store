@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    username: '',
+    email: '',
     password: ''
   });
   const [error, setError] = useState('');
@@ -23,7 +23,7 @@ const Login = () => {
     e.preventDefault();
     setError('');
 
-    const result = await login(formData.username, formData.password);
+    const result = await login(formData.email, formData.password);
 
     if (result.success) {
       navigate('/');
@@ -43,13 +43,13 @@ const Login = () => {
 
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="username" className="form-label">Username</label>
+            <label htmlFor="email" className="form-label">Email</label>
             <input
-              type="text"
+              type="email"
               className="form-control"
-              id="username"
-              name="username"
-              value={formData.username}
+              id="email"
+              name="email"
+              value={formData.email}
               onChange={handleInputChange}
               required
             />

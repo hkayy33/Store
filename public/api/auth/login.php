@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../src/config/database.php';
+require_once __DIR__ . '/../../../src/config/database.php';
 
 header('Content-Type: application/json');
 
@@ -11,11 +11,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $data = json_decode(file_get_contents('php://input'), true);
-$username = $data['username'] ?? '';
+$email = $data['email'] ?? '';
 $password = $data['password'] ?? '';
 
-if (empty($username) || empty($password)) {
-    echo json_encode(['success' => false, 'error' => 'Username and password are required']);
+if (empty($email) || empty($password)) {
+    echo json_encode(['success' => false, 'error' => 'Email and password are required']);
     exit;
 }
 
@@ -23,23 +23,20 @@ try {
     $database = new Database();
     $db = $database->getConnection();
 
-    $stmt = $db->prepare("SELECT id, username, email, password, role FROM users WHERE username = :username");
-    $stmt->execute([':username' => $username]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt = $db->prepare("SELECT id, name, phone, email, password, created_at FROM customers WHERE email = :email");
+    $stmt->execute([':email' => $email]);
+    $customer = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($user && password_verify($password, $user['password'])) {
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['role'] = $user['role'];
-        
+    if ($customer && password_verify($password, $customer['password'])) {
+        $_SESSION['customer_id'] = $customer['id'];
         // Remove password from response
-        unset($user['password']);
-        
+        unset($customer['password']);
         echo json_encode([
             'success' => true,
-            'user' => $user
+            'customer' => $customer
         ]);
     } else {
-        echo json_encode(['success' => false, 'error' => 'Invalid username or password']);
+        echo json_encode(['success' => false, 'error' => 'Invalid email or password']);
     }
 } catch(PDOException $e) {
     http_response_code(500);

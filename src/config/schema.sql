@@ -1,6 +1,6 @@
 -- Create database
-CREATE DATABASE IF NOT EXISTS grocery_store;
-USE grocery_store;
+CREATE DATABASE IF NOT EXISTS grocerystore;
+USE grocerystore;
 
 -- Users table
 CREATE TABLE IF NOT EXISTS users (
@@ -44,6 +44,16 @@ CREATE TABLE IF NOT EXISTS order_items (
     price DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (order_id) REFERENCES orders(id),
     FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+-- Customers table for secure registration
+CREATE TABLE IF NOT EXISTS customers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    phone VARCHAR(15) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Insert sample data
