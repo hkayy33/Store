@@ -1,15 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
-    password: ''
+    password: '',
+    captcha: ''
   });
   const [error, setError] = useState('');
+  const [captchaImage, setCaptchaImage] = useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Fetch new CAPTCHA when component mounts
+    fetchCaptcha();
+  }, []);
+
+  const fetchCaptcha = async () => {
+    try {
+      const response = await fetch('/api/auth/captcha.php');
+      const data = await response.json();
+      if (data.success) {
+        setCaptchaImage(data.image);
+        setFormData(prev => ({ ...prev, captcha: '' }));
+      }
+    } catch (error) {
+      console.error('Error fetching CAPTCHA:', error);
+    }
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,12 +43,14 @@ const Login = () => {
     e.preventDefault();
     setError('');
 
-    const result = await login(formData.email, formData.password);
+    const result = await login(formData.email, formData.password, formData.captcha);
 
     if (result.success) {
       navigate('/');
     } else {
       setError(result.error || 'Login failed');
+      // Refresh CAPTCHA on failed login
+      fetchCaptcha();
     }
   };
 
@@ -64,6 +86,35 @@ const Login = () => {
               value={formData.password}
               onChange={handleInputChange}
               required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">CAPTCHA</label>
+            <div className="d-flex align-items-center gap-2">
+              <div className="captcha-display p-2 bg-light border rounded text-center" style={{ minWidth: '200px' }}>
+                <img 
+                  src={captchaImage} 
+                  alt="CAPTCHA" 
+                  style={{ maxWidth: '100%', height: 'auto' }}
+                />
+              </div>
+              <button 
+                type="button" 
+                className="btn btn-outline-secondary" 
+                onClick={fetchCaptcha}
+              >
+                <i className="bi bi-arrow-clockwise"></i>
+              </button>
+            </div>
+            <input
+              type="text"
+              className="form-control mt-2"
+              id="captcha"
+              name="captcha"
+              value={formData.captcha}
+              onChange={handleInputChange}
+              required
+              placeholder="Enter the code shown in the image"
             />
           </div>
           <button type="submit" className="btn btn-primary w-100">Login</button>

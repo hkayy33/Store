@@ -13,9 +13,16 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $data = json_decode(file_get_contents('php://input'), true);
 $email = $data['email'] ?? '';
 $password = $data['password'] ?? '';
+$captcha = $data['captcha'] ?? '';
 
-if (empty($email) || empty($password)) {
-    echo json_encode(['success' => false, 'error' => 'Email and password are required']);
+if (empty($email) || empty($password) || empty($captcha)) {
+    echo json_encode(['success' => false, 'error' => 'Email, password and CAPTCHA are required']);
+    exit;
+}
+
+// Validate CAPTCHA
+if (!isset($_SESSION['captcha']) || $captcha != $_SESSION['captcha']) {
+    echo json_encode(['success' => false, 'error' => 'Invalid CAPTCHA']);
     exit;
 }
 

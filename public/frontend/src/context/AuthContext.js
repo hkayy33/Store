@@ -26,14 +26,14 @@ export const AuthProvider = ({ children }) => {
     checkAuth();
   }, []);
 
-  const login = async (email, password) => {
+  const login = async (email, password, captcha) => {
     try {
       const response = await fetch('/api/auth/login.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, captcha }),
       });
 
       const data = await response.json();
@@ -45,17 +45,13 @@ export const AuthProvider = ({ children }) => {
         return { success: false, error: data.error };
       }
     } catch (error) {
+      console.error('Login error:', error);
       return { success: false, error: 'An error occurred during login' };
     }
   };
 
-  const logout = async () => {
-    try {
-      await fetch('/api/auth/logout.php');
-      setUser(null);
-    } catch (error) {
-      console.error('Error during logout:', error);
-    }
+  const logout = () => {
+    setUser(null);
   };
 
   const value = {
