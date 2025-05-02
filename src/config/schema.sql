@@ -1,7 +1,3 @@
--- Create database
-CREATE DATABASE IF NOT EXISTS grocerystore;
-USE grocerystore;
-
 -- Users table
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
