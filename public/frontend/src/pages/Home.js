@@ -40,17 +40,17 @@ const Home = () => {
         <div className="col-md-6">
           <div className="d-grid gap-3">
             <button
-              className={`btn btn-lg ${activeCategory === 'vegetables' ? 'btn-primary' : 'btn-outline-primary'}`}
-              onClick={() => setActiveCategory(activeCategory === 'vegetables' ? null : 'vegetables')}
+              className={`btn btn-lg ${activeCategory === 'Vegetables' ? 'btn-primary' : 'btn-outline-primary'}`}
+              onClick={() => setActiveCategory(activeCategory === 'Vegetables' ? null : 'Vegetables')}
             >
               <i className="bi bi-egg me-2"></i>
               Vegetables
             </button>
 
-            {activeCategory === 'vegetables' && (
+            {activeCategory === 'Vegetables' && (
               <div className="category-dropdown fade-in">
                 <div className="list-group">
-                  {(categories.vegetables || []).map(product => (
+                  {(categories['Vegetables'] || []).map(product => (
                     <button
                       key={product.id}
                       className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
@@ -80,17 +80,17 @@ const Home = () => {
             )}
 
             <button
-              className={`btn btn-lg ${activeCategory === 'meats' ? 'btn-primary' : 'btn-outline-primary'}`}
-              onClick={() => setActiveCategory(activeCategory === 'meats' ? null : 'meats')}
+              className={`btn btn-lg ${activeCategory === 'Meat' ? 'btn-primary' : 'btn-outline-primary'}`}
+              onClick={() => setActiveCategory(activeCategory === 'Meat' ? null : 'Meat')}
             >
               <i className="bi bi-basket me-2"></i>
               Meats
             </button>
 
-            {activeCategory === 'meats' && (
+            {activeCategory === 'Meat' && (
               <div className="category-dropdown fade-in">
                 <div className="list-group">
-                  {(categories.meats || []).map(product => (
+                  {(categories['Meat'] || []).map(product => (
                     <button
                       key={product.id}
                       className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
