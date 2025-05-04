@@ -18,9 +18,10 @@ const Cart = () => {
       try {
         const response = await fetch('/api/cart.php');
         const data = await response.json();
-        setCartItems(data);
+        setCartItems(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error('Error fetching cart items:', error);
+        setCartItems([]); // fallback to empty array on error
       } finally {
         setLoading(false);
       }
@@ -67,12 +68,12 @@ const Cart = () => {
     return <div className="text-center">Loading cart...</div>;
   }
 
-  const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const total = Array.isArray(cartItems) ? cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0) : 0;
 
   return (
     <div className="container mt-4">
       <h2>Shopping Cart</h2>
-      {cartItems.length === 0 ? (
+      {Array.isArray(cartItems) && cartItems.length === 0 ? (
         <p>Your cart is empty</p>
       ) : (
         <div className="table-responsive">
@@ -87,7 +88,7 @@ const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              {cartItems.map(item => (
+              {Array.isArray(cartItems) && cartItems.map(item => (
                 <tr key={item.id}>
                   <td>{item.name}</td>
                   <td>${item.price}</td>
