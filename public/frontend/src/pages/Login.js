@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
@@ -12,6 +12,7 @@ const Login = () => {
   const [captchaImage, setCaptchaImage] = useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     // Fetch new CAPTCHA when component mounts
@@ -46,7 +47,9 @@ const Login = () => {
     const result = await login(formData.email, formData.password, formData.captcha);
 
     if (result.success) {
-      navigate('/');
+      const params = new URLSearchParams(location.search);
+      const redirect = params.get('redirect') || '/';
+      navigate(redirect);
     } else {
       setError(result.error || 'Login failed');
       // Refresh CAPTCHA on failed login

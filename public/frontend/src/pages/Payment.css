@@ -1,0 +1,11 @@
+.checkout-steps {
+  position: relative;
+  min-height: 500px;
+}
+.checkout-step {
+  background: transparent;
+  will-change: transform, opacity;
+}
+.checkout-step.active {
+  z-index: 2;
+} 

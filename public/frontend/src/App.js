@@ -10,6 +10,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import Dashboard from './pages/admin/Dashboard';
 import ProductManagement from './pages/admin/ProductManagement';
 import { CartProvider } from './context/CartContext';
+import Payment from './pages/Payment';
 import './App.css';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                   <Route path="/register" element={<Register />} />
                   <Route path="/products" element={<ProductList />} />
                   <Route path="/cart" element={<Cart />} />
+                  <Route path="/payment" element={<Payment />} />
                   
                   {/* Admin Routes */}
                   <Route 

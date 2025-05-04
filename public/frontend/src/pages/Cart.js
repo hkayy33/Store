@@ -65,10 +65,10 @@ const Cart = () => {
 
   const handleCheckout = () => {
     if (!user) {
-      navigate('/login?redirect=/checkout');
+      navigate('/login?redirect=/payment');
       return;
     }
-    navigate('/checkout');
+    navigate('/payment');
   };
 
   if (loading) {
