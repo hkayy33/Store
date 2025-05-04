@@ -59,22 +59,33 @@ function createProductCard(product) {
 }
 
 function addToCart(productId) {
-    fetch('api/cart.php', {
+    fetch('/api/cart.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            product_id: productId,
+            productId: productId,
             quantity: 1
         })
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
     .then(data => {
-        if (data.success) {
-            showAlert('Product added to cart!', 'success');
+        if (data.error) {
+            showAlert(data.error, 'danger');
         } else {
-            showAlert('Error adding product to cart', 'danger');
+            showAlert('Product added to cart!', 'success');
+            // Update cart count in navbar if it exists
+            const cartCount = document.querySelector('.cart-count');
+            if (cartCount) {
+                const currentCount = parseInt(cartCount.textContent) || 0;
+                cartCount.textContent = currentCount + 1;
+            }
         }
     })
     .catch(error => {
@@ -84,18 +95,19 @@ function addToCart(productId) {
 }
 
 function showAlert(message, type) {
+    // Create alert element
     const alertDiv = document.createElement('div');
-    alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
-    alertDiv.role = 'alert';
+    alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed top-0 end-0 m-3`;
+    alertDiv.style.zIndex = '9999';
     alertDiv.innerHTML = `
         ${message}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     `;
-
-    const container = document.querySelector('.container');
-    container.insertBefore(alertDiv, container.firstChild);
-
-    // Remove alert after 3 seconds
+    
+    // Add to document
+    document.body.appendChild(alertDiv);
+    
+    // Auto dismiss after 3 seconds
     setTimeout(() => {
         alertDiv.remove();
     }, 3000);

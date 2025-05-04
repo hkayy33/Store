@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
 const Home = () => {
   const [activeCategory, setActiveCategory] = useState(null);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const { refreshCartCount } = useCart();
 
   useEffect(() => {
     fetch('/api/products.php')
@@ -66,7 +68,32 @@ const Home = () => {
                         </div>
                         <span className="product-name">{product.name}</span>
                       </div>
-                      <button type="button" className="modern-cart-badge">
+                      <button type="button" className="modern-cart-badge" onClick={async (e) => {
+                        e.stopPropagation();
+                        try {
+                          const response = await fetch('/api/cart.php', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            credentials: 'include',
+                            body: JSON.stringify({ productId: product.id, quantity: 1 })
+                          });
+                          if (!response.ok) throw new Error('Failed to add to cart');
+                          const data = await response.json();
+                          if (data.error) {
+                            alert(data.error);
+                          } else {
+                            refreshCartCount();
+                            const alertDiv = document.createElement('div');
+                            alertDiv.className = 'alert alert-success alert-dismissible fade show position-fixed top-0 end-0 m-3';
+                            alertDiv.style.zIndex = '9999';
+                            alertDiv.innerHTML = `Product added to cart!<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
+                            document.body.appendChild(alertDiv);
+                            setTimeout(() => alertDiv.remove(), 3000);
+                          }
+                        } catch (error) {
+                          alert('Error adding product to cart');
+                        }
+                      }}>
                         <span className="price">£{Number(product.price).toFixed(2)}</span>
                         <span className="cart-action">
                           <i className="bi bi-cart-plus me-1"></i>
@@ -106,7 +133,32 @@ const Home = () => {
                         </div>
                         <span className="product-name">{product.name}</span>
                       </div>
-                      <button type="button" className="modern-cart-badge">
+                      <button type="button" className="modern-cart-badge" onClick={async (e) => {
+                        e.stopPropagation();
+                        try {
+                          const response = await fetch('/api/cart.php', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            credentials: 'include',
+                            body: JSON.stringify({ productId: product.id, quantity: 1 })
+                          });
+                          if (!response.ok) throw new Error('Failed to add to cart');
+                          const data = await response.json();
+                          if (data.error) {
+                            alert(data.error);
+                          } else {
+                            refreshCartCount();
+                            const alertDiv = document.createElement('div');
+                            alertDiv.className = 'alert alert-success alert-dismissible fade show position-fixed top-0 end-0 m-3';
+                            alertDiv.style.zIndex = '9999';
+                            alertDiv.innerHTML = `Product added to cart!<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
+                            document.body.appendChild(alertDiv);
+                            setTimeout(() => alertDiv.remove(), 3000);
+                          }
+                        } catch (error) {
+                          alert('Error adding product to cart');
+                        }
+                      }}>
                         <span className="price">£{Number(product.price).toFixed(2)}</span>
                         <span className="cart-action">
                           <i className="bi bi-cart-plus me-1"></i>

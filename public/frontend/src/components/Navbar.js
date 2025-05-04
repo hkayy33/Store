@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const { cartCount, refreshCartCount } = useCart();
+
+  useEffect(() => {
+    // Optionally, refresh cart count on mount
+    refreshCartCount();
+    // Optionally, set interval if you want periodic refresh
+    // const interval = setInterval(refreshCartCount, 5000);
+    // return () => clearInterval(interval);
+  }, [refreshCartCount]);
 
   const handleLogout = async () => {
     await logout();
@@ -34,14 +44,17 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
-            {user && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/cart">
-                  <i className="bi bi-cart me-1"></i>
-                  Cart
-                </Link>
-              </li>
-            )}
+            <li className="nav-item">
+              <Link className="nav-link" to="/cart">
+                <i className="bi bi-cart me-1"></i>
+                Cart
+                {cartCount > 0 && (
+                  <span className="badge bg-danger ms-1 cart-count">
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
+            </li>
             {user?.role === 'admin' && (
               <li className="nav-item">
                 <Link className="nav-link" to="/admin">
@@ -53,28 +66,20 @@ const Navbar = () => {
           </ul>
           <ul className="navbar-nav">
             {user ? (
-              <li className="nav-item dropdown">
-                <a 
-                  className="nav-link dropdown-toggle" 
-                  href="#" 
-                  role="button" 
-                  data-bs-toggle="dropdown"
-                >
-                  <i className="bi bi-person-circle me-1"></i>
-                  {user.username}
-                </a>
-                <ul className="dropdown-menu dropdown-menu-end">
-                  <li>
-                    <button 
-                      className="dropdown-item" 
-                      onClick={handleLogout}
-                    >
-                      <i className="bi bi-box-arrow-right me-2"></i>
-                      Logout
-                    </button>
-                  </li>
-                </ul>
-              </li>
+              <>
+                <li className="nav-item">
+                  <span className="nav-link">
+                    <i className="bi bi-person-circle me-1"></i>
+                    {user.username}
+                  </span>
+                </li>
+                <li className="nav-item">
+                  <button className="nav-link btn btn-link" onClick={handleLogout}>
+                    <i className="bi bi-box-arrow-right me-1"></i>
+                    Logout
+                  </button>
+                </li>
+              </>
             ) : (
               <>
                 <li className="nav-item">

@@ -9,11 +9,6 @@ const Cart = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) {
-      navigate('/login');
-      return;
-    }
-
     const fetchCartItems = async () => {
       try {
         const response = await fetch('/api/cart.php');
@@ -21,14 +16,14 @@ const Cart = () => {
         setCartItems(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error('Error fetching cart items:', error);
-        setCartItems([]); // fallback to empty array on error
+        setCartItems([]);
       } finally {
         setLoading(false);
       }
     };
 
     fetchCartItems();
-  }, [user, navigate]);
+  }, []);
 
   const updateQuantity = async (productId, quantity) => {
     try {
@@ -62,6 +57,15 @@ const Cart = () => {
     } catch (error) {
       console.error('Error removing item:', error);
     }
+  };
+
+  const handleCheckout = () => {
+    if (!user) {
+      navigate('/login');
+      return;
+    }
+    // Proceed with checkout for logged-in users
+    navigate('/checkout');
   };
 
   if (loading) {
@@ -119,7 +123,12 @@ const Cart = () => {
                 <td colSpan="3" className="text-end"><strong>Total:</strong></td>
                 <td><strong>${total.toFixed(2)}</strong></td>
                 <td>
-                  <button className="btn btn-primary">Checkout</button>
+                  <button 
+                    className="btn btn-primary"
+                    onClick={handleCheckout}
+                  >
+                    {user ? 'Checkout' : 'Login to Checkout'}
+                  </button>
                 </td>
               </tr>
             </tfoot>

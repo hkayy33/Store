@@ -1,34 +1,69 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const { refreshCartCount } = useCart();
 
   useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('/api/products.php');
+        const data = await response.json();
+        setProducts(data);
+        
+        // Extract unique categories
+        const uniqueCategories = [...new Set(data.map(product => product.category))];
+        setCategories(uniqueCategories);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchProducts();
-    fetchCategories();
   }, []);
 
-  const fetchProducts = async () => {
+  const handleAddToCart = async (productId) => {
     try {
-      const response = await axios.get('/api/products.php');
-      setProducts(response.data.products);
-    } catch (error) {
-      console.error('Error fetching products:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+      const response = await fetch('/api/cart.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ productId, quantity: 1 })
+      });
 
-  const fetchCategories = async () => {
-    try {
-      const response = await axios.get('/api/categories.php');
-      setCategories(response.data);
+      if (!response.ok) {
+        throw new Error('Failed to add to cart');
+      }
+
+      const data = await response.json();
+      if (data.error) {
+        alert(data.error);
+      } else {
+        refreshCartCount();
+        // Show success message
+        const alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-success alert-dismissible fade show position-fixed top-0 end-0 m-3';
+        alertDiv.style.zIndex = '9999';
+        alertDiv.innerHTML = `
+          Product added to cart!
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+        document.body.appendChild(alertDiv);
+        setTimeout(() => alertDiv.remove(), 3000);
+      }
     } catch (error) {
-      console.error('Error fetching categories:', error);
+      console.error('Error adding to cart:', error);
+      alert('Error adding product to cart');
     }
   };
 
@@ -37,7 +72,7 @@ const ProductList = () => {
     : products;
 
   if (loading) {
-    return <div className="text-center">Loading...</div>;
+    return <div className="text-center">Loading products...</div>;
   }
 
   return (
@@ -76,7 +111,12 @@ const ProductList = () => {
                 <p className="card-text">
                   <strong>Stock:</strong> {product.stock_quantity}
                 </p>
-                <button className="btn btn-primary">Add to Cart</button>
+                <button 
+                  className="btn btn-primary"
+                  onClick={() => handleAddToCart(product.id)}
+                >
+                  Add to Cart
+                </button>
               </div>
             </div>
           </div>
