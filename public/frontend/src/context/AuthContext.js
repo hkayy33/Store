@@ -74,6 +74,8 @@ export const AuthProvider = ({ children }) => {
       // Clear frontend state
       setUser(null);
       localStorage.removeItem('session_expiry');
+      // Reload the page
+      window.location.reload();
     } catch (error) {
       console.error('Logout error:', error);
     }
