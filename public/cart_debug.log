@@ -10023,3 +10023,171 @@ Array
 
     [php://input] => 
 )
+
+==== 2025-05-04T21:57:30+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => 7plBJ8
+            [cart] => Array
+                (
+                    [1] => 2
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T21:57:30+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => 7plBJ8
+            [cart] => Array
+                (
+                    [1] => 2
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T21:57:31+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => 7plBJ8
+            [cart] => Array
+                (
+                    [1] => 2
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T21:57:31+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => 7plBJ8
+            [cart] => Array
+                (
+                    [1] => 2
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T22:00:36+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => 7plBJ8
+            [cart] => Array
+                (
+                    [1] => 2
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T22:00:36+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => 7plBJ8
+            [cart] => Array
+                (
+                    [1] => 2
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T22:00:37+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => 7plBJ8
+            [cart] => Array
+                (
+                    [1] => 2
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T22:00:37+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => 7plBJ8
+            [cart] => Array
+                (
+                    [1] => 2
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)

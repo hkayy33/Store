@@ -28,6 +28,7 @@ const Payment = () => {
   const [paying, setPaying] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
+  const [orderDetails, setOrderDetails] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -82,7 +83,20 @@ const Payment = () => {
     setTimeout(() => {
       setPaying(false);
       setSuccess(true);
-      setTimeout(() => navigate('/'), 3000);
+      // Generate order details for receipt
+      const today = new Date();
+      let deliveryDays = delivery === 'express' ? 2 : 5;
+      const expectedDate = new Date(today.getTime() + deliveryDays * 24 * 60 * 60 * 1000);
+      setOrderDetails({
+        orderId: 'ORD-' + Math.floor(100000 + Math.random() * 900000),
+        date: today.toLocaleDateString(),
+        expected: expectedDate.toLocaleDateString(),
+        address,
+        delivery,
+        cart,
+        total,
+        card: `**** **** **** ${card.number.slice(-4)}`
+      });
     }, 1800);
   };
 
@@ -96,8 +110,43 @@ const Payment = () => {
               {loading ? (
                 <div className="text-center">Loading...</div>
               ) : success ? (
-                <div className="alert alert-success text-center">
-                  Payment successful! Thank you for your order.<br />Redirecting to home...
+                <div className="digital-receipt p-4 text-center animate__animated animate__fadeIn">
+                  <h3 className="mb-3">Payment Successful</h3>
+                  <div className="receipt-box mx-auto mb-4 p-4 rounded shadow-sm bg-light" style={{maxWidth: 420}}>
+                    <div className="mb-2 text-muted small">Order ID: <span className="fw-bold">{orderDetails?.orderId}</span></div>
+                    <div className="mb-2">Date: <span className="fw-bold">{orderDetails?.date}</span></div>
+                    <div className="mb-2">Expected Delivery: <span className="fw-bold text-success">{orderDetails?.expected}</span></div>
+                    <hr />
+                    <div className="mb-2 text-start">
+                      <strong>Delivery Address:</strong><br />
+                      {orderDetails?.address.name}<br />
+                      {orderDetails?.address.address}<br />
+                      {orderDetails?.address.city}, {orderDetails?.address.postcode}<br />
+                      {orderDetails?.address.country}
+                    </div>
+                    <div className="mb-2 text-start">
+                      <strong>Delivery Method:</strong> {orderDetails?.delivery === 'express' ? 'Express (1-2 days)' : 'Standard (3-5 days)'}
+                    </div>
+                    <hr />
+                    <div className="mb-2 text-start">
+                      <strong>Order Items:</strong>
+                      <ul className="list-group mb-2">
+                        {orderDetails?.cart.map(item => (
+                          <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center px-2 py-1">
+                            <span>{item.name} <span className="text-muted">x{item.quantity}</span></span>
+                            <span>£{(item.price * item.quantity).toFixed(2)}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="mb-2 text-start">
+                      <strong>Paid with:</strong> <span className="fw-bold">{orderDetails?.card}</span>
+                    </div>
+                    <div className="mb-2 text-end fs-5">
+                      <strong>Total Paid: £{orderDetails?.total.toFixed(2)}</strong>
+                    </div>
+                  </div>
+                  <button className="btn btn-primary mt-3" onClick={() => navigate('/')}>Continue Shopping</button>
                 </div>
               ) : (
                 <div className="checkout-steps">
