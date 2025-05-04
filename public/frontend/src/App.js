@@ -26,14 +26,7 @@ function App() {
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
                   <Route path="/products" element={<ProductList />} />
-                  <Route 
-                    path="/cart" 
-                    element={
-                      <ProtectedRoute>
-                        <Cart />
-                      </ProtectedRoute>
-                    } 
-                  />
+                  <Route path="/cart" element={<Cart />} />
                   
                   {/* Admin Routes */}
                   <Route 

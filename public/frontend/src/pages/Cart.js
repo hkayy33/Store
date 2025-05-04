@@ -65,10 +65,9 @@ const Cart = () => {
 
   const handleCheckout = () => {
     if (!user) {
-      navigate('/login');
+      navigate('/login?redirect=/checkout');
       return;
     }
-    // Proceed with checkout for logged-in users
     navigate('/checkout');
   };
 
@@ -131,7 +130,7 @@ const Cart = () => {
                     className="btn btn-primary"
                     onClick={handleCheckout}
                   >
-                    {user ? 'Checkout' : 'Login to Checkout'}
+                    Checkout
                   </button>
                 </td>
               </tr>
