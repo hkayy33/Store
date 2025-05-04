@@ -42,7 +42,7 @@ function createProductCard(product) {
             <div class="card-body">
                 <h5 class="card-title">${product.name}</h5>
                 <p class="card-text">${product.description}</p>
-                <p class="product-price">$${product.price.toFixed(2)}</p>
+                <p class="product-price">£${product.price.toFixed(2)}</p>
                 <button class="btn btn-primary add-to-cart" data-product-id="${product.id}">
                     Add to Cart
                 </button>

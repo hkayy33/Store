@@ -95,7 +95,7 @@ const Cart = () => {
               {Array.isArray(cartItems) && cartItems.map(item => (
                 <tr key={item.id}>
                   <td>{item.name}</td>
-                  <td>${item.price}</td>
+                  <td>£{item.price}</td>
                   <td>
                     <input
                       type="number"
@@ -106,7 +106,7 @@ const Cart = () => {
                       style={{ width: '70px' }}
                     />
                   </td>
-                  <td>${(item.price * item.quantity).toFixed(2)}</td>
+                  <td>£{(item.price * item.quantity).toFixed(2)}</td>
                   <td>
                     <button
                       className="btn btn-danger btn-sm"
@@ -121,7 +121,7 @@ const Cart = () => {
             <tfoot>
               <tr>
                 <td colSpan="3" className="text-end"><strong>Total:</strong></td>
-                <td><strong>${total.toFixed(2)}</strong></td>
+                <td><strong>£{total.toFixed(2)}</strong></td>
                 <td>
                   <button 
                     className="btn btn-primary"

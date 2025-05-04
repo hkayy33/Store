@@ -231,7 +231,7 @@ const ProductManagement = () => {
                   <tr key={product.id}>
                     <td>{product.name}</td>
                     <td>{product.category}</td>
-                    <td>${product.price}</td>
+                    <td>£{product.price}</td>
                     <td>{product.stock_quantity}</td>
                     <td>
                       <button

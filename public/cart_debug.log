@@ -2715,3 +2715,513 @@ Array
 
     [php://input] => 
 )
+
+==== 2025-05-04T19:49:34+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => ecb4f
+            [cart] => Array
+                (
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T19:49:53+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => ecb4f
+            [cart] => Array
+                (
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T19:49:53+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => ecb4f
+            [cart] => Array
+                (
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T19:49:53+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => Aeik2
+            [cart] => Array
+                (
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T19:49:53+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => Aeik2
+            [cart] => Array
+                (
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T19:49:53+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => Aeik2
+            [cart] => Array
+                (
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T19:49:53+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => 7plBJ8
+            [cart] => Array
+                (
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T19:49:53+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => 24qu3
+            [cart] => Array
+                (
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T19:49:53+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => 24qu3
+            [cart] => Array
+                (
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T19:49:53+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => 24qu3
+            [cart] => Array
+                (
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T19:49:53+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => Aeik2
+            [cart] => Array
+                (
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T19:49:53+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => 7plBJ8
+            [cart] => Array
+                (
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T19:49:53+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => 7plBJ8
+            [cart] => Array
+                (
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T19:49:56+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => 7plBJ8
+            [cart] => Array
+                (
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => {"productId":1,"quantity":1}
+)
+
+==== 2025-05-04T19:49:56+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => 7plBJ8
+            [cart] => Array
+                (
+                    [1] => 1
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T19:50:11+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => ecb4f
+            [cart] => Array
+                (
+                    [1] => 1
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T19:50:11+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => ecb4f
+            [cart] => Array
+                (
+                    [1] => 1
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T19:50:13+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => ecb4f
+            [cart] => Array
+                (
+                    [1] => 1
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T19:50:17+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => ecb4f
+            [cart] => Array
+                (
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => {"productId":1,"quantity":1}
+)
+
+==== 2025-05-04T19:50:17+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => ecb4f
+            [cart] => Array
+                (
+                    [1] => 1
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T19:50:18+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => ecb4f
+            [cart] => Array
+                (
+                    [1] => 1
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T19:50:18+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => ecb4f
+            [cart] => Array
+                (
+                    [1] => 1
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
+
+==== 2025-05-04T19:50:20+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => ecb4f
+            [cart] => Array
+                (
+                    [1] => 1
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => {"productId":1,"quantity":2}
+)
+
+==== 2025-05-04T19:50:22+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => ecb4f
+            [cart] => Array
+                (
+                    [1] => 2
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => {"productId":1,"quantity":3}
+)
+
+==== 2025-05-04T19:50:24+00:00 ====
+Array
+(
+    [_SESSION] => Array
+        (
+            [customer_id] => 1
+            [captcha] => ecb4f
+            [cart] => Array
+                (
+                    [1] => 3
+                )
+
+        )
+
+    [_POST] => Array
+        (
+        )
+
+    [php://input] => 
+)
