@@ -62,6 +62,6 @@ INSERT INTO products (name, category, subcategory, price, image_url, description
 ('Beef', 'Meat', 'Red Meat', 7.99, 'images/beef.jpg', 'Premium beef steak', 40),
 ('Pork', 'Meat', 'Red Meat', 6.99, 'images/pork.jpg', 'Fresh pork chops', 45);
 
--- Insert admin user (password: admin123)
+-- Insert admin user (password: pass)
 INSERT INTO users (username, password, email, role) VALUES
 ('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin@grocerystore.com', 'admin'); 

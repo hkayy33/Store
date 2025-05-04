@@ -3,7 +3,11 @@ session_start();
 require_once '../src/config/database.php';
 
 if (isset($_SESSION['user_id'])) {
-    header('Location: index.php');
+    if ($_SESSION['role'] === 'admin') {
+        header('Location: manager.php');
+    } else {
+        header('Location: index.php');
+    }
     exit;
 }
 
@@ -13,14 +17,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $database = new Database();
     $db = $database->getConnection();
 
-    $username = $_POST['username'] ?? '';
+    $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    if (empty($username) || empty($password)) {
+    if (empty($email) || empty($password)) {
         $error = 'Please fill in all fields';
     } else {
-        $stmt = $db->prepare("SELECT * FROM users WHERE username = :username");
-        $stmt->execute([':username' => $username]);
+        $stmt = $db->prepare("SELECT * FROM users WHERE email = :email");
+        $stmt->execute([':email' => $email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($password, $user['password'])) {
@@ -28,10 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['username'] = $user['username'];
             $_SESSION['role'] = $user['role'];
             
-            header('Location: index.php');
+            if ($user['role'] === 'admin') {
+                header('Location: manager.php');
+            } else {
+                header('Location: index.php');
+            }
             exit;
         } else {
-            $error = 'Invalid username or password';
+            $error = 'Invalid email or password';
         }
     }
 }
@@ -56,8 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <form method="POST" action="login.php">
                 <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" required>
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
