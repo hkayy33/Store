@@ -26,12 +26,21 @@ git clone https://github.com/hkayy33/Store.git
 cd Store
 ```
 
-2. Create a MySQL database and import the schema:
+2. Set up your local web server:
+   - For Apache:
+     - Enable mod_rewrite
+     - Point your document root to the `public` directory
+     - Ensure the web server has write permissions for the `public/images` directory
+   - For Nginx:
+     - Configure your server block to point to the `public` directory
+     - Add rewrite rules for clean URLs
+
+3. Create a MySQL database and import the schema:
 ```bash
 mysql -u your_username -p your_database_name < src/config/schema.sql
 ```
 
-3. Configure the database connection:
+4. Configure the database connection:
    - Open `src/config/database.php`
    - Update the database credentials:
      ```php
@@ -41,12 +50,8 @@ mysql -u your_username -p your_database_name < src/config/schema.sql
      private $password = "your_password";
      ```
 
-4. Set up your web server:
-   - Point your web server's document root to the `public` directory
-   - Ensure the web server has write permissions for the `public/images` directory
-
 5. Access the application:
-   - Open your web browser and navigate to your server's URL
+   - Open your web browser and navigate to your local server's URL
    - Default admin credentials:
      - Username: admin
      - Password: admin123
