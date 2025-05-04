@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { refreshCartCount } = useCart();
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -38,6 +40,7 @@ const Cart = () => {
       if (response.ok) {
         const updatedCart = await response.json();
         setCartItems(updatedCart);
+        refreshCartCount();
       }
     } catch (error) {
       console.error('Error updating cart:', error);
@@ -53,6 +56,7 @@ const Cart = () => {
       if (response.ok) {
         const updatedCart = await response.json();
         setCartItems(updatedCart);
+        refreshCartCount();
       }
     } catch (error) {
       console.error('Error removing item:', error);
