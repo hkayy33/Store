@@ -7,7 +7,7 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const { refreshCartCount } = useCart();
+  const { refreshCart } = useCart();
 
   useEffect(() => {
     fetch('/api/products.php')
@@ -82,7 +82,7 @@ const Home = () => {
                           if (data.error) {
                             alert(data.error);
                           } else {
-                            refreshCartCount();
+                            refreshCart();
                             const alertDiv = document.createElement('div');
                             alertDiv.className = 'alert alert-success alert-dismissible fade show position-fixed top-0 end-0 m-3';
                             alertDiv.style.zIndex = '9999';
@@ -147,7 +147,7 @@ const Home = () => {
                           if (data.error) {
                             alert(data.error);
                           } else {
-                            refreshCartCount();
+                            refreshCart();
                             const alertDiv = document.createElement('div');
                             alertDiv.className = 'alert alert-success alert-dismissible fade show position-fixed top-0 end-0 m-3';
                             alertDiv.style.zIndex = '9999';

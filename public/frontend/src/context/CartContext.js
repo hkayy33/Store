@@ -1,30 +1,29 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
+  const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
 
-  const refreshCartCount = useCallback(async () => {
+  const refreshCart = useCallback(async () => {
     try {
       const response = await fetch('/api/cart.php');
       const data = await response.json();
-      if (Array.isArray(data)) {
-        const totalItems = data.reduce((sum, item) => sum + item.quantity, 0);
-        setCartCount(totalItems);
-      }
-    } catch (error) {
+      setCartItems(Array.isArray(data) ? data : []);
+      setCartCount(Array.isArray(data) ? data.reduce((sum, item) => sum + item.quantity, 0) : 0);
+    } catch {
+      setCartItems([]);
       setCartCount(0);
     }
   }, []);
 
-  // Initial fetch
-  React.useEffect(() => {
-    refreshCartCount();
-  }, [refreshCartCount]);
+  useEffect(() => {
+    refreshCart();
+  }, [refreshCart]);
 
   return (
-    <CartContext.Provider value={{ cartCount, refreshCartCount }}>
+    <CartContext.Provider value={{ cartItems, setCartItems, cartCount, setCartCount, refreshCart }}>
       {children}
     </CartContext.Provider>
   );

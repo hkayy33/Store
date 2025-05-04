@@ -8,7 +8,7 @@ const ProductList = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const { refreshCartCount } = useCart();
+  const { refreshCart } = useCart();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -49,7 +49,7 @@ const ProductList = () => {
       if (data.error) {
         alert(data.error);
       } else {
-        refreshCartCount();
+        refreshCart();
         // Show success message
         const alertDiv = document.createElement('div');
         alertDiv.className = 'alert alert-success alert-dismissible fade show position-fixed top-0 end-0 m-3';

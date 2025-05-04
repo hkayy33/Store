@@ -1,10 +1,24 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
+const SESSION_DURATION_MINUTES = 30; // Set session duration here
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  // Check session expiry on load and every minute
+  useEffect(() => {
+    const checkSession = () => {
+      const expiry = localStorage.getItem('session_expiry');
+      if (expiry && Date.now() > Number(expiry)) {
+        logout();
+      }
+    };
+    checkSession();
+    const interval = setInterval(checkSession, 60 * 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     // Check if user is logged in
@@ -40,6 +54,9 @@ export const AuthProvider = ({ children }) => {
 
       if (data.success) {
         setUser(data.customer);
+        // Set session expiry
+        const expiry = Date.now() + SESSION_DURATION_MINUTES * 60 * 1000;
+        localStorage.setItem('session_expiry', expiry);
         return { success: true };
       } else {
         return { success: false, error: data.error };
@@ -50,8 +67,16 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
-    setUser(null);
+  const logout = async () => {
+    try {
+      // Call backend logout endpoint
+      await fetch('/logout.php');
+      // Clear frontend state
+      setUser(null);
+      localStorage.removeItem('session_expiry');
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   };
 
   const value = {

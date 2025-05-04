@@ -6,15 +6,15 @@ import { useCart } from '../context/CartContext';
 const Navbar = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const { cartCount, refreshCartCount } = useCart();
+  const { cartCount, refreshCart } = useCart();
 
   useEffect(() => {
     // Optionally, refresh cart count on mount
-    refreshCartCount();
+    refreshCart();
     // Optionally, set interval if you want periodic refresh
     // const interval = setInterval(refreshCartCount, 5000);
     // return () => clearInterval(interval);
-  }, [refreshCartCount]);
+  }, [refreshCart]);
 
   const handleLogout = async () => {
     await logout();

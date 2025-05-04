@@ -1,31 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([]);
-  const [loading, setLoading] = useState(true);
   const { user } = useAuth();
   const navigate = useNavigate();
-  const { refreshCartCount } = useCart();
+  const { cartItems, setCartItems, refreshCart } = useCart();
 
   useEffect(() => {
-    const fetchCartItems = async () => {
-      try {
-        const response = await fetch('/api/cart.php');
-        const data = await response.json();
-        setCartItems(Array.isArray(data) ? data : []);
-      } catch (error) {
-        console.error('Error fetching cart items:', error);
-        setCartItems([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCartItems();
-  }, []);
+    refreshCart();
+  }, [refreshCart]);
 
   const updateQuantity = async (productId, quantity) => {
     try {
@@ -40,7 +25,7 @@ const Cart = () => {
       if (response.ok) {
         const updatedCart = await response.json();
         setCartItems(updatedCart);
-        refreshCartCount();
+        refreshCart();
       }
     } catch (error) {
       console.error('Error updating cart:', error);
@@ -56,7 +41,7 @@ const Cart = () => {
       if (response.ok) {
         const updatedCart = await response.json();
         setCartItems(updatedCart);
-        refreshCartCount();
+        refreshCart();
       }
     } catch (error) {
       console.error('Error removing item:', error);
@@ -70,10 +55,6 @@ const Cart = () => {
     }
     navigate('/payment');
   };
-
-  if (loading) {
-    return <div className="text-center">Loading cart...</div>;
-  }
 
   const total = Array.isArray(cartItems) ? cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0) : 0;
 

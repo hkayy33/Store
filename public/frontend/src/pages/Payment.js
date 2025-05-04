@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 import './Payment.css';
 
 const deliveryOptions = [
@@ -30,6 +31,7 @@ const Payment = () => {
   const [error, setError] = useState('');
   const [orderDetails, setOrderDetails] = useState(null);
   const navigate = useNavigate();
+  const { refreshCart, setCartItems, setCartCount } = useCart();
 
   useEffect(() => {
     // Try to fetch cart from backend, fallback to localStorage
@@ -80,7 +82,7 @@ const Payment = () => {
     e.preventDefault();
     setError('');
     setPaying(true);
-    setTimeout(() => {
+    setTimeout(async () => {
       setPaying(false);
       setSuccess(true);
       // Generate order details for receipt
@@ -97,7 +99,24 @@ const Payment = () => {
         total,
         card: `**** **** **** ${card.number.slice(-4)}`
       });
+      // Clear cart after payment
+      try {
+        await fetch('/api/cart.php', { method: 'DELETE' });
+        localStorage.removeItem('cart');
+        setCart([]);
+        setCartItems([]);
+        setCartCount(0);
+        refreshCart();
+      } catch {}
     }, 1800);
+  };
+
+  const handleContinueShopping = () => {
+    setCart([]);
+    setCartItems([]);
+    setCartCount(0);
+    refreshCart();
+    navigate('/');
   };
 
   return (
@@ -111,7 +130,7 @@ const Payment = () => {
                 <div className="text-center">Loading...</div>
               ) : success ? (
                 <div className="digital-receipt p-4 text-center animate__animated animate__fadeIn">
-                  <h3 className="mb-3">Payment Successful</h3>
+                  <h3 className="mb-3">Order Successful</h3>
                   <div className="receipt-box mx-auto mb-4 p-4 rounded shadow-sm bg-light" style={{maxWidth: 420}}>
                     <div className="mb-2 text-muted small">Order ID: <span className="fw-bold">{orderDetails?.orderId}</span></div>
                     <div className="mb-2">Date: <span className="fw-bold">{orderDetails?.date}</span></div>
@@ -146,7 +165,7 @@ const Payment = () => {
                       <strong>Total Paid: £{orderDetails?.total.toFixed(2)}</strong>
                     </div>
                   </div>
-                  <button className="btn btn-primary mt-3" onClick={() => navigate('/')}>Continue Shopping</button>
+                  <button className="btn btn-primary mt-3" onClick={handleContinueShopping}>Continue Shopping</button>
                 </div>
               ) : (
                 <div className="checkout-steps">
