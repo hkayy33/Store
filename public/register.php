@@ -56,7 +56,7 @@ if ($_SESSION['register_attempts'] > 10) {
             $db = $database->getConnection();
 
             // Retrieve and sanitise input fields
-            $username = trim(filter_var($_POST['username'] ?? '', FILTER_SANITIZE_STRING));
+            $username = trim(htmlspecialchars($_POST['username'] ?? '', ENT_QUOTES, 'UTF-8'));
             $email = filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL);
             $password = $_POST['password'] ?? '';
             $confirm_password = $_POST['confirm_password'] ?? '';
@@ -120,7 +120,7 @@ if ($_SESSION['register_attempts'] > 10) {
             <h2 class="text-center mb-4">Register</h2>
             
             <?php if ($error): ?>
-                <div class="alert alert-danger"><?php echo htmlspecialchars($error); ?></div>
+                <div class="alert alert-danger"><?php echo ($error); ?></div>
             <?php endif; ?>
             
             <?php if ($success): ?>
